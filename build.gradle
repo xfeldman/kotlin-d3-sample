@@ -1,0 +1,70 @@
+version '1.0-SNAPSHOT'
+
+buildscript {
+    apply from: 'versions.gradle'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin2js'
+
+def target = "${projectDir}/web"
+def projectName = name
+
+compileKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.outputFile ="$target/${projectName}.js"
+    kotlinOptions.sourceMap = true
+}
+
+compileTestKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.outputFile = "$target/${projectName}.test.js"
+    kotlinOptions.sourceMap = true
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
+    compile "org.jetbrains.kotlinx:kotlinx-html-js:${kotlinx_html_version}"
+    testCompile "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-annotations-common:$kotlin_version"
+}
+
+kotlin { experimental.coroutines = 'enable' }
+
+task assembleWeb(type: Sync) {
+    configurations.compile.each { File file ->
+        from(zipTree(file.absolutePath), {
+            includeEmptyDirs = false
+            include { fileTreeElement ->
+                def path = fileTreeElement.path
+                path.endsWith(".js") && (path.startsWith("META-INF/resources/") ||
+                        !path.startsWith("META-INF/"))
+            }
+        })
+    }
+    from compileKotlin2Js.destinationDir
+    into "${projectDir}/web/lib"
+
+    dependsOn classes
+}
+
+assemble.dependsOn assembleWeb
+
+task cleanWeb {
+    delete "${projectDir}/web"
+}
+
+clean.dependsOn cleanWeb
