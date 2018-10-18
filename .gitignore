@@ -24,6 +24,7 @@
 .idea/codeStyles
 .idea/dictionaries
 .idea/jsLibraryMappings.xml
+.idea/kotlinc.xml
 
 build
 web
