@@ -1,3 +1,4 @@
+import d3.selection.ValueFn
 import d3.selection.select
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.svg.SVGCircleElement
@@ -44,7 +45,6 @@ fun animate(datum:MyDatum, index:Number, groups:Array<SVGCircleElement>) {
 fun sampleDataBinding() {
     var dataset = ArrayList<MyDatum>()
 
-
     for(i in 0..4){
         dataset.add (MyDatum(round(Math.random()*2000)))
     }
@@ -53,13 +53,14 @@ fun sampleDataBinding() {
             .append<SVGElement>("svg")
             .attr("width", 400)
             .attr("height", 100)
+
     sampleSVG.selectAll<SVGCircleElement, MyDatum>("circle")
             .data(dataset.toTypedArray())
             .enter().append<SVGCircleElement>("circle")
             .style("stroke", "gray")
             .style("fill", "white")
             .attr("r", 40)
-            .attr("cx") { d:MyDatum, i:Number, g:Array<SVGCircleElement> -> i.toInt()*80 + 40}
+            .attr("cx") {_:MyDatum, i:Number, _:Array<SVGCircleElement> -> (i.toInt()*80 + 40)}
             .attr("cy", 40)
             .on("mouseover", {_:MyDatum, index:Number, groups:Array<SVGCircleElement> ->
                 select<SVGCircleElement, MyDatum>(groups[index.toInt()]).style("fill", "aliceblue");})

@@ -144,10 +144,11 @@ external interface Transition<GElement:BaseType, Datum, PElement:BaseType, PDatu
      * the current index (i), and the current group (nodes), with this as the current DOM element (nodes[i]).
      * A null value will clear the attribute at the start of the transition.
      */
-    fun attr(name: String, value: ValueFn<GElement, Datum, String>): Transition<GElement, Datum, PElement, PDatum>
-    fun attr(name: String, value: ValueFn<GElement, Datum, Boolean>): Transition<GElement, Datum, PElement, PDatum>
-    fun attr(name: String, value: ValueFn<GElement, Datum, Number>): Transition<GElement, Datum, PElement, PDatum>
-    fun attr(name: String, value: ValueFn<GElement, Datum, Unit>): Transition<GElement, Datum, PElement, PDatum>
+    fun attr(name: String, value: ValueFn<GElement, Datum, Any?>): Transition<GElement, Datum, PElement, PDatum>
+//    KT-11265
+//    fun attr(name: String, value: ValueFn<GElement, Datum, Boolean>): Transition<GElement, Datum, PElement, PDatum>
+//    fun attr(name: String, value: ValueFn<GElement, Datum, Number>): Transition<GElement, Datum, PElement, PDatum>
+//    fun attr(name: String, value: ValueFn<GElement, Datum, Unit>): Transition<GElement, Datum, PElement, PDatum>
 
     /**
      * Return the current interpolator factory for attribute with the specified name, or undefined if no such tween exists.
@@ -208,10 +209,11 @@ external interface Transition<GElement:BaseType, Datum, PElement:BaseType, PDatu
      * A null value will clear the style at the start of the transition.
      * @param priority An optional priority flag, either null or the string important (without the exclamation point)
      */
-    fun style(name: String, value: ValueFn<GElement, Datum, String>, priority: String? = definedExternally): Transition<GElement, Datum, PElement, PDatum>
-    fun style(name: String, value: ValueFn<GElement, Datum, Boolean>, priority: String? = definedExternally): Transition<GElement, Datum, PElement, PDatum>
-    fun style(name: String, value: ValueFn<GElement, Datum, Number>, priority: String? = definedExternally): Transition<GElement, Datum, PElement, PDatum>
-    fun style(name: String, value: ValueFn<GElement, Datum, Unit>, priority: String? = definedExternally): Transition<GElement, Datum, PElement, PDatum>
+    fun style(name: String, value: ValueFn<GElement, Datum, Any?>, priority: String? = definedExternally): Transition<GElement, Datum, PElement, PDatum>
+//    KT-11265
+//    fun style(name: String, value: ValueFn<GElement, Datum, Boolean>, priority: String? = definedExternally): Transition<GElement, Datum, PElement, PDatum>
+//    fun style(name: String, value: ValueFn<GElement, Datum, Number>, priority: String? = definedExternally): Transition<GElement, Datum, PElement, PDatum>
+//    fun style(name: String, value: ValueFn<GElement, Datum, Unit>, priority: String? = definedExternally): Transition<GElement, Datum, PElement, PDatum>
 
     /**
      * Return the current interpolator factory for style with the specified name, or undefined if no such tween exists.
@@ -255,9 +257,10 @@ external interface Transition<GElement:BaseType, Datum, PElement:BaseType, PDatu
      * the current index (i), and the current group (nodes), with this as the current DOM element (nodes[i]).
      * A null value will clear the text content at the start of the transition.
      */
-    fun text(value: ValueFn<GElement, Datum, String>): Transition<GElement, Datum, PElement, PDatum>
-    fun text(value: ValueFn<GElement, Datum, Number>): Transition<GElement, Datum, PElement, PDatum>
-    fun text(value: ValueFn<GElement, Datum, Boolean>): Transition<GElement, Datum, PElement, PDatum>
+    fun text(value: ValueFn<GElement, Datum, Any?>): Transition<GElement, Datum, PElement, PDatum>
+//    KT-11265
+//    fun text(value: ValueFn<GElement, Datum, Number>): Transition<GElement, Datum, PElement, PDatum>
+//    fun text(value: ValueFn<GElement, Datum, Boolean>): Transition<GElement, Datum, PElement, PDatum>
 
     /**
      * Returns the tween with the specified name, or undefined, if no tween was previously assigned to

@@ -144,6 +144,7 @@ external interface Selection<GElement:BaseType, Datum, PElement:BaseType, PDatum
      * the current index (i), and the current group (nodes), with this as the current DOM element (nodes[i]).  A null value will clear the attribute.
      */
     fun attr(name: String, value: ValueFn<GElement, Datum, Any?>): Selection<GElement, Datum, PElement, PDatum>
+//    KT-11265
 //    fun attr(name: String, value: ValueFn<GElement, Datum, Number?>): Selection<GElement, Datum, PElement, PDatum>
 //    fun attr(name: String, value: ValueFn<GElement, Datum, Boolean?>): Selection<GElement, Datum, PElement, PDatum>
 
@@ -206,9 +207,10 @@ external interface Selection<GElement:BaseType, Datum, PElement:BaseType, PDatum
      * the current index (i), and the current group (nodes), with this as the current DOM element (nodes[i]).  A null value will clear the style.
      * @param priority An optional priority flag, either null or the string important (without the exclamation point)
      */
-    fun style(name: String, value: ValueFn<GElement, Datum, String?>, priority: String?): Selection<GElement, Datum, PElement, PDatum>
-    fun style(name: String, value: ValueFn<GElement, Datum, Number?>, priority: String?): Selection<GElement, Datum, PElement, PDatum>
-    fun style(name: String, value: ValueFn<GElement, Datum, Boolean?>, priority: String?): Selection<GElement, Datum, PElement, PDatum>
+    fun style(name: String, value: ValueFn<GElement, Datum, Any?>, priority: String?): Selection<GElement, Datum, PElement, PDatum>
+//    KT-11265
+//    fun style(name: String, value: ValueFn<GElement, Datum, Number?>, priority: String?): Selection<GElement, Datum, PElement, PDatum>
+//    fun style(name: String, value: ValueFn<GElement, Datum, Boolean?>, priority: String?): Selection<GElement, Datum, PElement, PDatum>
 
     /**
      * Return the current value of the specified property for the first (non-null) element in the selection.
@@ -289,9 +291,10 @@ external interface Selection<GElement:BaseType, Datum, PElement:BaseType, PDatum
      * the current index (i), and the current group (nodes), with this as the current DOM element (nodes[i]).
      * The function’s return value is then used to set each element’s text content. A null value will clear the content.
      */
-    fun text(value: ValueFn<GElement, Datum, String?>): Selection<GElement, Datum, PElement, PDatum>
-    fun text(value: ValueFn<GElement, Datum, Number?>): Selection<GElement, Datum, PElement, PDatum>
-    fun text(value: ValueFn<GElement, Datum, Boolean?>): Selection<GElement, Datum, PElement, PDatum>
+    fun text(value: ValueFn<GElement, Datum, Any?>): Selection<GElement, Datum, PElement, PDatum>
+//    KT-11265
+//    fun text(value: ValueFn<GElement, Datum, Number?>): Selection<GElement, Datum, PElement, PDatum>
+//    fun text(value: ValueFn<GElement, Datum, Boolean?>): Selection<GElement, Datum, PElement, PDatum>
 
     /**
      * Returns a string representation of the inner HTML for the first (non-null) element in the selection.
@@ -632,7 +635,7 @@ external interface Selection<GElement:BaseType, Datum, PElement:BaseType, PDatum
      * to receive events of the same type, such as click.foo and click.bar. To specify multiple typenames, separate typenames with spaces,
      * such as "input change"" or "click.foo click.bar".
      */
-    fun on(typenames: String): Unit
+    fun on(typenames: String)
     /**
      * Add an event listener for the specified event type names. If an event listener was previously registered for the same typename
      * on a selected element, the old listener is removed before the new listener is added.
@@ -735,7 +738,7 @@ external interface Selection<GElement:BaseType, Datum, PElement:BaseType, PDatum
      *
      * @param name Name of the transition.
      */
-    fun transition(name: String = definedExternally): Transition<GElement, Datum, PElement, PDatum>;
+    fun transition(name: String = definedExternally): Transition<GElement, Datum, PElement, PDatum>
     /**
      * Returns a new transition on the given selection.
      *
