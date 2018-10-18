@@ -1,4 +1,3 @@
-import d3.selection.ValueFn
 import d3.selection.select
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.svg.SVGCircleElement

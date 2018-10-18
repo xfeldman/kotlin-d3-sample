@@ -1,6 +1,6 @@
-## Sample D3.js application written in Kotlin
+# Sample D3.js application written in Kotlin
 
-##### Install
+#### Install
 
 ```
 git clone git@github.com:xfeldman/kotlin-d3-sample.git
