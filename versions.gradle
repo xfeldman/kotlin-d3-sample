@@ -1,3 +1,7 @@
 ext.kotlin_version = '1.2.70'
 ext.kotlinx_coroutines_version = '0.23.4'
 ext.kotlinx_html_version = '0.6.11'
+ext.react_version = '16.5.2-pre.57-kotlin-1.2.71'
+ext.react_dom_version = '16.5.2-pre.57-kotlin-1.2.71'
+ext.kotlin_frontend_version='0.0.37'
+

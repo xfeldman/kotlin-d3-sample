@@ -5,42 +5,6 @@ import org.w3c.dom.svg.SVGElement
 import kotlin.js.Math
 import kotlin.math.round
 
-data class MyDatum(val number: Double)
-
-fun main(args: Array<String>) {
-//    sampleAnimation()
-    sampleDataBinding()
-}
-
-fun sampleAnimation() {
-    var sampleSVG = select<HTMLDivElement, MyDatum>("#container")
-            .append<SVGElement>("svg")
-            .attr("width", 100)
-            .attr("height", 100)
-
-    sampleSVG.append<SVGCircleElement>("circle")
-            .style("stroke", "gray")
-            .style("fill", "white")
-            .attr("r", 40)
-            .attr("cx", 50)
-            .attr("cy", 50)
-            .on("mouseover", {_:MyDatum, index:Number, groups:Array<SVGCircleElement> ->
-                select<SVGCircleElement, MyDatum>(groups[index.toInt()]).style("fill", "aliceblue");})
-            .on("mouseout", {_:MyDatum, index:Number, groups:Array<SVGCircleElement> ->
-                select<SVGCircleElement, MyDatum>(groups[index.toInt()]).style("fill", "white");})
-            .on("mousedown", ::animate)
-}
-
-fun animate(datum:MyDatum, index:Number, groups:Array<SVGCircleElement>) {
-    select<SVGCircleElement, MyDatum>(groups[index.toInt()]).transition()
-            .attr("r", 10)
-            .transition()
-            .delay(1000)
-            .attr("r", 40)
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 fun sampleDataBinding() {
     var dataset = ArrayList<MyDatum>()
 
@@ -75,11 +39,11 @@ fun animateFirstStep(datum:MyDatum, index:Number, groups:Array<SVGCircleElement>
             .duration(datum.number)
             .attr("r", 10)
             .on("end", ::animateSecondStep)
-};
+}
 
 fun animateSecondStep(datum:MyDatum, index:Number, groups:Array<SVGCircleElement>){
     select<SVGCircleElement, MyDatum>(groups[index.toInt()])
             .transition()
             .duration(datum.number)
             .attr("r", 40)
-};
+}

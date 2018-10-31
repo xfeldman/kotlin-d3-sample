@@ -1,5 +1,5 @@
 @file:Suppress("UNUSED", "UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
-@file:JsQualifier("d3")
+@file:JsModule("d3")
 
 package d3.selection
 
@@ -291,7 +291,7 @@ external interface Selection<GElement:BaseType, Datum, PElement:BaseType, PDatum
      * the current index (i), and the current group (nodes), with this as the current DOM element (nodes[i]).
      * The function’s return value is then used to set each element’s text content. A null value will clear the content.
      */
-    fun text(value: ValueFn<GElement, Datum, Any?>): Selection<GElement, Datum, PElement, PDatum>
+    fun text(value: ValueFn<GElement, Datum, String?>): Selection<GElement, Datum, PElement, PDatum>
 //    KT-11265
 //    fun text(value: ValueFn<GElement, Datum, Number?>): Selection<GElement, Datum, PElement, PDatum>
 //    fun text(value: ValueFn<GElement, Datum, Boolean?>): Selection<GElement, Datum, PElement, PDatum>

@@ -1,5 +1,5 @@
 @file:Suppress("UNUSED", "UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
-@file:JsQualifier("d3")
+@file:JsModule("d3")
 
 package d3.selection
 

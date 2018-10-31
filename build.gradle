@@ -5,66 +5,70 @@ buildscript {
 
     repositories {
         mavenCentral()
+        maven {
+            url "https://dl.bintray.com/kotlin/kotlin-eap"
+        }
     }
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:$kotlin_frontend_version"
     }
 }
 
+apply plugin: 'org.jetbrains.kotlin.frontend'
 apply plugin: 'kotlin2js'
 
-def target = "${projectDir}/web"
 def projectName = name
 
 compileKotlin2Js {
     kotlinOptions.metaInfo = true
-    kotlinOptions.outputFile ="$target/${projectName}.js"
+    kotlinOptions.outputFile ="$project.buildDir.path/js/${project.name}.js"
     kotlinOptions.sourceMap = true
+    kotlinOptions.moduleKind = "commonjs"
+    kotlinOptions.main = "call"
 }
 
 compileTestKotlin2Js {
     kotlinOptions.metaInfo = true
-    kotlinOptions.outputFile = "$target/${projectName}.test.js"
+    kotlinOptions.outputFile = "$project.buildDir.path/js-tests/${project.name}-tests.js"
     kotlinOptions.sourceMap = true
+    kotlinOptions.moduleKind = "commonjs"
+    kotlinOptions.main = "call"
+}
+
+kotlinFrontend {
+    downloadNodeJsVersion = "latest"
+    npm {
+        dependency "style-loader" // production dependency
+        dependency "d3"
+        devDependency "karma"     // development dependency
+    }
+    webpackBundle {
+        bundleName = "main"
+        contentPath = file('src/main/web')
+        mode = 'development'
+//        mode = 'production'
+    }
 }
 
 repositories {
     mavenCentral()
     jcenter()
+    maven {
+        url "http://dl.bintray.com/kotlin/kotlin-js-wrappers"
+    }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
     compile "org.jetbrains.kotlinx:kotlinx-html-js:${kotlinx_html_version}"
+    compile "org.jetbrains:kotlin-react:$react_version"
+    compile "org.jetbrains:kotlin-react-dom:$react_dom_version"
+
     testCompile "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test-annotations-common:$kotlin_version"
 }
 
 kotlin { experimental.coroutines = 'enable' }
-
-task assembleWeb(type: Sync) {
-    configurations.compile.each { File file ->
-        from(zipTree(file.absolutePath), {
-            includeEmptyDirs = false
-            include { fileTreeElement ->
-                def path = fileTreeElement.path
-                path.endsWith(".js") && (path.startsWith("META-INF/resources/") ||
-                        !path.startsWith("META-INF/"))
-            }
-        })
-    }
-    from compileKotlin2Js.destinationDir
-    into "${projectDir}/web/lib"
-
-    dependsOn classes
-}
-
-assemble.dependsOn assembleWeb
-
-task cleanWeb {
-    delete "${projectDir}/web"
-}
-
-clean.dependsOn cleanWeb

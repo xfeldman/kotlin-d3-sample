@@ -7,7 +7,8 @@ git clone git@github.com:xfeldman/kotlin-d3-sample.git
 cd kotlin-d3-sample
 npm i
 ./gradlew build
-http-server
+./gradlew run
+./gradlew stop
 ```
 
 #### Import to IDEA
