@@ -27,6 +27,7 @@
 .idea/jsLibraryMappings.xml
 .idea/kotlinc.xml
 
+bin
 build
 web
 hs_err_pid*
