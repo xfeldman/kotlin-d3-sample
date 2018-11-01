@@ -1,5 +1,3 @@
-import react.RProps
-import react.RState
 import react.dom.render
 import kotlin.browser.document
 
