@@ -10,9 +10,4 @@ fun main(args: Array<String>) {
 //    sampleDataBinding()
 }
 
-enum class MorphingState {
-    CIRCLE, SQUARE
-}
-
-
 
