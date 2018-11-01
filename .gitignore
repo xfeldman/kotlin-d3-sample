@@ -29,7 +29,6 @@
 
 bin
 build
-web
 hs_err_pid*
 logs
 node_modules
